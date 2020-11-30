@@ -12,6 +12,8 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
+    "csv-parse": "^4.14.1",
+    "csv-parser": "^2.3.3",
     "ml-logistic-regression": "^2.0.0",
     "quasar": "^1.0.0"
   },
