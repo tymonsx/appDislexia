@@ -49,10 +49,15 @@
             :step="0.1"
             label-always
             color="primary"
+            :style="
+              $q.screen.width > 750
+                ? 'margin-left:-50%; width:150%;'
+                : 'width:105%;'
+            "
           />
         </q-item-section>
       </q-item>
-      <q-item>
+      <!--<q-item>
         <q-item-section>
           <span class="text-primary">TCL (logMAR)</span>
         </q-item-section>
@@ -64,9 +69,14 @@
             :step="0.1"
             label-always
             color="primary"
+            :style="
+              $q.screen.width > 750
+                ? 'margin-left:-50%; width:150%;'
+                : 'width:105%;'
+            "
           />
         </q-item-section>
-      </q-item>
+      </q-item>-->
       <q-item>
         <q-item-section>
           <span class="text-primary">AL (logMAR)</span>
@@ -79,6 +89,11 @@
             :step="0.1"
             label-always
             color="primary"
+            :style="
+              $q.screen.width > 750
+                ? 'margin-left:-50%; width:150%;'
+                : 'width:105%;'
+            "
           />
         </q-item-section>
       </q-item>
@@ -118,7 +133,45 @@
         v-model.number="vl"
         label="VL (PPM)"
         type="number"
-        style="width:97%; margin-left:2%;"
+        :style="
+          $q.screen.width > 750
+            ? 'width:98.5%;margin-left:0.5%;'
+            : 'width:97%; margin-left:2%;'
+        "
+        ref="inputVl"
+      /><br />
+      <q-input
+        v-model.number="mvl"
+        label="MVL (PPM)"
+        type="number"
+        style=""
+        :style="
+          $q.screen.width > 750
+            ? 'width:98.5%;margin-left:0.5%;'
+            : 'width:97%; margin-left:2%;'
+        "
+        ref="inputMvl"
+      /><br />
+      <q-input
+        v-model.number="vtcl"
+        label="VTCL (PPM)"
+        type="number"
+        :style="
+          $q.screen.width > 750
+            ? 'width:98.5%;margin-left:0.5%;'
+            : 'width:97%; margin-left:2%;'
+        "
+        ref="inputVtcl"
+      />
+      <!--<q-input
+        v-model.number="vl"
+        label="VL (PPM)"
+        type="number"
+        :style="
+          $q.screen.width > 750
+            ? 'width:98.5%;margin-left:0.5%;'
+            : 'width:97%; margin-left:2%;'
+        "
         @change="validarInputNumero('vl')"
         ref="inputVl"
       /><br />
@@ -126,7 +179,12 @@
         v-model.number="mvl"
         label="MVL (PPM)"
         type="number"
-        style="width:97%; margin-left:2%;"
+        style=""
+        :style="
+          $q.screen.width > 750
+            ? 'width:98.5%;margin-left:0.5%;'
+            : 'width:97%; margin-left:2%;'
+        "
         @change="validarInputNumero('mvl')"
         ref="inputMvl"
       /><br />
@@ -134,10 +192,14 @@
         v-model.number="vtcl"
         label="VTCL (PPM)"
         type="number"
-        style="width:97%; margin-left:2%;"
+        :style="
+          $q.screen.width > 750
+            ? 'width:98.5%;margin-left:0.5%;'
+            : 'width:97%; margin-left:2%;'
+        "
         @change="validarInputNumero('vtcl')"
         ref="inputVtcl"
-      />
+      />-->
       <q-dialog v-model="popupInputNumero">
         <q-card class="full-width">
           <q-card-section>
@@ -145,8 +207,7 @@
           </q-card-section>
           <q-card-section class="q-pt-none text-justify">
             <p>
-              O número precisa ser no mínimo 80 e no máximo 300. Por favor
-              digite novamente
+              O número precisa ser de no máximo 400 . Por favor digite novamente
             </p>
           </q-card-section>
 
@@ -164,25 +225,40 @@
         style="margin-right:20px;"
       ></q-btn>
       <q-btn label="Predizer" color="primary" @click="predizer()"></q-btn>
-      <q-dialog v-model="popupResultados">
+      <!--<q-dialog v-model="popupResultados">
         <q-card class="full-width">
           <q-card-section>
             <div class="text-h6 text-center">Resultado: {{ resultado }}</div>
           </q-card-section>
-          <!--<q-card-section class="q-pt-none text-justify">
-            <p>LMVL = {{ lmvl }} logMAR</p>
-            <p>TCL = {{ tcl }} logMAR</p>
-            <p>AL = {{ al }} logMAR</p>
-            <p>VL = {{ vl }} PPM</p>
-            <p>MVL = {{ mvl }} PPM</p>
-            <p>VTCL = {{ vtcl }} PPM</p>
-          </q-card-section>-->
+          <q-card-actions align="right" class="bg-white text-teal">
+            <q-btn flat label="OK" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>-->
+      <q-dialog v-model="popupCamposBranco">
+        <q-card class="full-width">
+          <q-card-section>
+            <div class="text-h6 text-center">Erro</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none text-justify">
+            <p>
+              Por favor preencha todos os 5 campos
+            </p>
+          </q-card-section>
 
           <q-card-actions align="right" class="bg-white text-teal">
             <q-btn flat label="OK" v-close-popup />
           </q-card-actions>
         </q-card>
       </q-dialog>
+    </div>
+    <div>
+      <p
+        class="text-h5 text-primary text-center text-bold"
+        :style="$q.screen.height > 750 ? 'margin-top:5%;' : ''"
+      >
+        Resultado: {{ resultado }}
+      </p>
     </div>
   </q-page>
 </template>
@@ -193,7 +269,7 @@ export default {
   data() {
     return {
       lmvl: 0,
-      tcl: 0,
+      //tcl: 0,
       al: 0,
       vl: "",
       mvl: "",
@@ -202,51 +278,65 @@ export default {
       popupLegendaVelocidade: false,
       popupInputNumero: false,
       popupResultados: false,
-      resultado: "Aqui"
+      popupCamposBranco: false,
+      resultado: ""
     };
   },
   methods: {
-    validarInputNumero(param) {
+    /* validarInputNumero(param) {
       if (param == "vl") {
-        console.log(this.vl);
-        if (this.vl < 80 || this.vl > 300) {
+        console.log("param ", this.vl);
+        if (this.vl > 400) {
           this.popupInputNumero = true;
           this.vl = "";
           this.$refs.inputVl.focus();
         }
       } else if (param == "mvl") {
-        console.log(this.mvl);
-        if (this.mvl < 80 || this.mvl > 300) {
+        console.log("param ", this.mvl);
+
+        if (this.mvl > 400) {
           this.popupInputNumero = true;
           this.mvl = "";
           this.$refs.inputMvl.focus();
         }
       } else if (param == "vtcl") {
-        if (this.vtcl < 80 || this.vtcl > 300) {
+        console.log("param ", this.vtcl);
+
+        if (this.vtcl > 400) {
           this.popupInputNumero = true;
           this.vtcl = "";
           this.$refs.inputVtcl.focus();
         }
       }
-    },
+    }, */
     limparCampos() {
       this.lmvl = 0;
-      this.tcl = 0;
+      //this.tcl = 0;
       this.al = 0;
       this.vl = "";
       this.mvl = "";
       this.vtcl = "";
     },
     predizer() {
-      console.log("MTL: ", this.lmvl);
-      console.log("TCL: ", this.tcl);
+      console.log("LMVL: ", this.lmvl);
+      //console.log("TCL: ", this.tcl);
       console.log("AL: ", this.al);
       console.log("VL: ", this.vl);
-      console.log("VMTL: ", this.mvl);
+      console.log("MVL: ", this.mvl);
       console.log("VTCL: ", this.vtcl);
 
       if (this.vl != "" && this.mvl != "" && this.vtcl != "") {
-        this.popupResultados = true;
+        this.resultado = "Aqui";
+        //this.popupResultados = true;
+      } else {
+        if (this.vl == "") {
+          this.$refs.inputVl.focus();
+        } else if (this.mvl == "") {
+          this.$refs.inputMvl.focus();
+        } else if (this.vtcl == "") {
+          this.$refs.inputVtcl.focus();
+        }
+        this.popupCamposBranco = true;
       }
     }
   }
