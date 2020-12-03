@@ -316,6 +316,7 @@ export default {
       this.vl = "";
       this.mvl = "";
       this.vtcl = "";
+      this.resultado = "";
     },
     predizer() {
       console.log("LMVL: ", this.lmvl);
