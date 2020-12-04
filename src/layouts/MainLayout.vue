@@ -12,7 +12,7 @@
             <img
               style="display:block; margin-right:auto;  "
               width="100px"
-              src="logo_dislexia.jfif"
+              src="logo_dislexia3.png"
             />
           </div>
           <div
