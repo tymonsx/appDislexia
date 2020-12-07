@@ -16,12 +16,11 @@
             <q-card-section>
               <div class="text-justify">
                 <p>
-                  A dislexia é uma dificuldade neurológica específica nos processamentos da linguagem[1,2]
-                  reconhecer, reproduzir, associar e ordenar sons e formas  das letras organizando-os corretamente
-                  Não pode ser descrito por:[1,2]
+                  A dislexia é uma dificuldade neurológica específica nos processamentos da linguagem
+                  reconhecer, reproduzir, associar e ordenar sons e formas  das letras organizando-os corretamente.
+                  Não pode ser descrito por:
                   desordem do desenvolvimento intelectual, acuidade visual, desordem neurológica, educação inadequada, proficiência na linguagem ou adversidade psicossocial.
-                  Cerca de 10%[3] a 20%[4,5] das pessoas do mundo possui algum grau de dislexia
-                  No Brasil essa taxa é de aproximadamente 12%[6]
+                                   
                 </p>
                 <p>
                   
@@ -62,7 +61,7 @@
               <div class="text-justify">
                 <p>
                   O aplicativo foi elaborado utilizando as seguintes ferramentas e bibliotecas: 
-                  Python, Tensorflow, Quasar, Vue, Cordova, Anaconda, Flask e Docker.
+                  Quasar, Vue, Cordova, Node.js.
 
                 </p>
                 <p>
@@ -72,20 +71,10 @@
                  
                 </p>
                 <p>
-                  Após esta etapa foi realizada a criação de um webservice REST simples 
-                  elaborado com a biblioteca Flask para disponibilizar as funcionalidades 
-                  do modelo de predição. O código do webservice pode ser acessado através 
-                  do link 
-                  <a
-                href="#"
-                v-on:click="
-                  abrirLink(
-                    'https://github.com/tymonsx/rest_balneabilidade'
-                  )
-                "
-                >Rest_Balneabilidade</a>
-
+                Na primeira etapa foi realizado o treinamento do modelo de regressão logística no Node.js e o modelo treinado
+                exportado em JSON. 
                 </p>
+                Após a primeira etapa o modelo foi importado para a o Quasar.
                 <p>
                   A última etapa foi a elaboração de um aplicativo para dispositivos móveis (plataforma Android) utilizando os frameworks Quasar, VueJS e Cordova. O código do aplicativo pode ser acessado através 
                   do link 
@@ -93,12 +82,25 @@
                 href="#"
                 v-on:click="
                   abrirLink(
-                    'https://github.com/raphaelhendrigo/app_balneabilidade'
+                    'https://github.com/tymonsx/appDislexia.git'
                   )
                 "
-                >App_Balneabilidade</a>
+                >AppDislexia</a>
 
                 </p>
+                <p>
+                  O protocolo MNREAD (Minnesota Low Vision Reading Test)[18] foi desenvolvido especificamente para avaliar FVL, 
+                  onde são apresentados uma sequência de textos, montados com um vocabulário controlado, em tamanhos decrescentes 
+                  (em escala logMAR ) e em cada leitura é medido a velocidade em palavras por minuto (ppm). Na Figura 1 é apresentado 
+                  um exemplo de medidas de velocidade de leitura deste teste, onde pode ser extraído a máxima velocidade de leitura 
+                  (MVL), caracterizado pela maior velocidade obtida em todos os textos, a linha máxima de velocidade de leitura 
+                  (LMVL), caracterizado pelo tamanho da letra durante a maior velocidade de leitura, o tamanho crítico de letra 
+                  (TCL) caracterizado pelo tamanho de letra em que a velocidade de leitura começa a decair, a velocidade de leitura 
+                  durante o tamanho crítico de letra (VTCL) e a acuidade de leitura (AL) o menor tamanho de letra lido.
+                </p>
+                <p>
+                  <img alt="Quasar logo" src="~assets/função_visual_sobre.png" >
+                </p>    
                 <p>
                   Este projeto foi realizado pela equipe de desenvolvimento do Departamento 
                   de Informática em Saúde - EPM - UNIFESP
