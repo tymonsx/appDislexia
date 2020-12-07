@@ -39,11 +39,11 @@
     <q-list class="full-width">
       <q-item>
         <q-item-section>
-          <span class="text-primary">LMVL (logMAR)</span>
+          <span class="text-primary">AL (logMAR)</span>
         </q-item-section>
         <q-item-section>
           <q-slider
-            v-model="lmvl"
+            v-model="al"
             :min="0"
             :max="1"
             :step="0.1"
@@ -79,11 +79,11 @@
       </q-item>-->
       <q-item>
         <q-item-section>
-          <span class="text-primary">AL (logMAR)</span>
+          <span class="text-primary">LMVL (logMAR)</span>
         </q-item-section>
         <q-item-section>
           <q-slider
-            v-model="al"
+            v-model="lmvl"
             :min="0"
             :max="1"
             :step="0.1"
@@ -224,7 +224,7 @@
         @click="limparCampos()"
         style="margin-right:20px;"
       ></q-btn>
-      <q-btn label="Predizer" color="primary" @click="predizer()"></q-btn>
+      <q-btn label="Predizer" color="primary" @click="chamarPredicao()"></q-btn>
       <!--<q-dialog v-model="popupResultados">
         <q-card class="full-width">
           <q-card-section>
@@ -264,6 +264,9 @@
 </template>
 
 <script>
+import Matrix from "ml-matrix";
+import LogisticRegressionTwoClasses from "ml-logistic-regression";
+
 export default {
   name: "PageIndex",
   data() {
@@ -318,7 +321,7 @@ export default {
       this.vtcl = "";
       this.resultado = "";
     },
-    predizer() {
+    chamarPredicao() {
       console.log("LMVL: ", this.lmvl);
       //console.log("TCL: ", this.tcl);
       console.log("AL: ", this.al);
@@ -327,8 +330,15 @@ export default {
       console.log("VTCL: ", this.vtcl);
 
       if (this.vl != "" && this.mvl != "" && this.vtcl != "") {
-        this.resultado = "Aqui";
         //this.popupResultados = true;
+
+        this.resultado = this.metodoPredicao(
+          this.lmvl,
+          this.al,
+          this.vl,
+          this.mvl,
+          this.vtcl
+        );
       } else {
         if (this.vl == "") {
           this.$refs.inputVl.focus();
@@ -339,6 +349,26 @@ export default {
         }
         this.popupCamposBranco = true;
       }
+    },
+    metodoPredicao(lmvl, al, vl, mvl, vtcl) {
+      let model = require("assets/modelo.json");
+      model = JSON.parse(JSON.stringify(model));
+      console.log("=> JSON carregado.", model);
+
+      let logreg = LogisticRegressionTwoClasses.load(model);
+      console.log("=> Regressão logistica Carregada.", logreg);
+
+      /* let LMVL = 0.5;
+      let AL = 0.4;
+      let VL = 116.6283796;
+      let MVL = 152.881223;
+      let VTCL = 116.6283796; */
+
+      let Xtest = new Matrix([[al, vl, lmvl, mvl, vtcl]]);
+      let finalResults = logreg.predict(Xtest);
+      console.log(finalResults[0]);
+      //console.log(finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico");
+      return finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico";
     }
   }
 };
