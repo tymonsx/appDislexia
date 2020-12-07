@@ -18,19 +18,28 @@ fs.createReadStream('dados.csv')
   .on('end', () => {
     //console.log('dados===========================================: ',data);
     data.shift();//remove linha com os títulos das colunas
-    let Y = data.map((value,index) => { return value[0]=='dislexico'? 1 : 0; });
+    let Y = data.map((value,index) => { return value[value.length-1]=='dislexico'? 1 : 0; });
     Y= Matrix.columnVector(Y);
     console.log('Y===========================================: ',Y);
-    let X = data.map((value,index) => { return value.slice(-value.length + 1); });
+    let X = data.map((value,index) => { return value.slice(0,-1); });
     X=new Matrix(X);
     console.log('X===========================================: ',X);
     //console.log(LogisticRegressionTwoClasses);
     //console.log(LogisticRegression);
     let logreg = new LogisticRegressionTwoClasses({
       numSteps: 5000,
-      learningRate: 1e-6
+      //learningRate: 12e-10
+      learningRate: 17e-7
     });
-    logreg.train(X, Y);
+    logreg.train(X, Y); 
+    //console.log(JSON.stringify(logreg));
+    
+    let modeloTreinado = JSON.stringify(logreg);
+    fs.writeFile("modelo.json", modeloTreinado, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });   
 
     let Xtest = new Matrix([
       [ '0.4', '116.6283796', '0.5', '152.881223', '116.6283796' ],
@@ -74,6 +83,5 @@ fs.createReadStream('dados.csv')
     ]);
     let finalResults = logreg.predict(Xtest);
     console.log(finalResults);
-
-
+    
   })
