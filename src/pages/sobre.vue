@@ -99,7 +99,7 @@
                   durante o tamanho crítico de letra (VTCL) e a acuidade de leitura (AL) o menor tamanho de letra lido.
                 </p>
                 <p>
-                  <img alt="Quasar logo" src="~assets/função_visual_sobre.png" >
+                  <img alt="Quasar logo" src="~assets/função_visual_sobre.png" :style="$q.screen.width > 750? '':'width:99%;'">
                 </p>    
                 <p>
                   Este projeto foi realizado pela equipe de desenvolvimento do Departamento 
