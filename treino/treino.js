@@ -28,8 +28,8 @@ fs.createReadStream('dados.csv')
     //console.log(LogisticRegression);
     let logreg = new LogisticRegressionTwoClasses({
       numSteps: 5000,
-      learningRate: 12e-10
-      //learningRate: 1e-9
+      //learningRate: 12e-10
+      learningRate: 17e-7
     });
     logreg.train(X, Y); 
     //console.log(JSON.stringify(logreg));
