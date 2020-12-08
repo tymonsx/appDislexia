@@ -4,6 +4,32 @@
       alt="Quasar logo"
       src="~assets/quasar-logo-full.svg"
     >-->
+    <div>
+      <q-list>
+        <q-expansion-item
+          :group="$q.screen.width > 1000 ? 'a' : 'gerar_dados_exemplo'"
+          label="Gerar Dados de Exemplo"
+          class="bg-secondary text-center"
+          v-model="expansionGerarDadosExemplo"
+        >
+          <q-card>
+            <q-card-section class="full-width text-center">
+              <q-btn
+                label="Disléxico"
+                color="primary"
+                style="margin-right:20px;"
+                @click="gerarDadosExemplo('disléxico')"
+              ></q-btn>
+              <q-btn
+                label="Não-Disléxico"
+                color="primary"
+                @click="gerarDadosExemplo('não-disléxico')"
+              ></q-btn>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+      </q-list>
+    </div>
     <div class="text-center justify-center">
       <span class=" text-primary q-ma-sm text-center">Tamanho da Fonte</span>
       <q-btn
@@ -216,7 +242,7 @@
         </q-card>
       </q-dialog>
     </div>
-    <div class="row items-end justify-center q-pa-md">
+    <div class="row items-end justify-center q-pa-xs">
       <q-btn
         label="Limpar Campos"
         color="primary"
@@ -281,7 +307,8 @@ export default {
       popupInputNumero: false,
       popupResultados: false,
       popupCamposBranco: false,
-      resultado: ""
+      resultado: "",
+      expansionGerarDadosExemplo: false
     };
   },
   methods: {
@@ -319,6 +346,7 @@ export default {
       this.mvl = "";
       this.vtcl = "";
       this.resultado = "";
+      this.expansionGerarDadosExemplo = false;
     },
     chamarPredicao() {
       console.log("LMVL: ", this.lmvl);
@@ -368,6 +396,25 @@ export default {
       console.log(finalResults[0]);
       //console.log(finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico");
       return finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico";
+    },
+    gerarDadosExemplo(param) {
+      this.resultado = "";
+
+      if (param == "disléxico") {
+        this.al = 0.4;
+        this.lmvl = 0.5;
+        this.vl = 116.62838;
+        this.mvl = 152.881223;
+        this.vtcl = 116.62838;
+      } else if (param == "não-disléxico") {
+        this.al = 0.2;
+        this.lmvl = 0.6;
+        this.vl = 121.875;
+        this.mvl = 241.044526;
+        this.vtcl = 229.591837;
+      }
+
+      this.expansionGerarDadosExemplo = false;
     }
   }
 };
