@@ -25,9 +25,8 @@
               logMAR = Unidade de medida para tamanhos de letras que representam
               o ângulo de visão
             </p>
-            <p>LMVL = Tamanho de letra na máxima velocidade de leitura</p>
-            <p>TCL = Tamanho crítico de letra</p>
             <p>AL = Acuidade de leitura</p>
+            <p>LMVL = Tamanho de letra na máxima velocidade de leitura</p>
           </q-card-section>
 
           <q-card-actions align="right" class="bg-white text-teal">

@@ -8,15 +8,15 @@
           @click="$router.replace('/')"
           active-class="my-menu-link"
         >
-          <div style="width:110px; float:left; ">
+          <div style="width:80px; float:left; ">
             <img
               style="display:block; margin-right:auto;  "
-              width="100px"
+              width="70px"
               src="logo_dislexia4.png"
             />
           </div>
           <div
-            style="width:50%; margin-left:50%; margin-right:50%; word-break: break-all; padding-top: 12px"
+            style="width:50%; margin-left:50%; margin-right:50%; word-break: break-all; padding-top: 15px;"
           >
             <!--<span style="font-size:15px; "
               >App Balnealidade das Praias do Estado de São Paulo</span
