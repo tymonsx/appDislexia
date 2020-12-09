@@ -22,24 +22,41 @@
                   desordem do desenvolvimento intelectual, acuidade visual, desordem neurológica, educação inadequada, proficiência na linguagem ou adversidade psicossocial.
                                    
                 </p>
+               
+              </div>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+      </q-list>
+
+       <q-list>
+        <q-expansion-item
+          :group="$q.screen.width > 1000 ? 'b' : 'sobre_app'"
+          label="O que são Funções Visuais de Leitura ?"
+          :class="$q.screen.width > 1000 ? 'bg-secondary text-justify' : 'text-justify'"
+          :default-opened="$q.screen.width > 1000"
+          :style="
+            $q.screen.width > 1000 ? 'font-size: 18px;' : 'font-size: 16px;'
+          "
+        >
+          <q-card>
+            <q-card-section>
+              <div class="text-justify">
+                
                 <p>
-                  
+                  O protocolo MNREAD (Minnesota Low Vision Reading Test) foi desenvolvido especificamente para avaliar as funções visuais de leitura (FVL), 
+                  onde são apresentados uma sequência de textos, montados com um vocabulário controlado, em tamanhos decrescentes 
+                  (em escala logMAR ) e em cada leitura é medido a velocidade em palavras por minuto (ppm). Na Figura abaixo é apresentado 
+                  um exemplo de medidas de velocidade de leitura deste teste, onde pode ser extraído a máxima velocidade de leitura 
+                  (MVL), caracterizado pela maior velocidade obtida em todos os textos, a linha máxima de velocidade de leitura 
+                  (LMVL), caracterizado pelo tamanho da letra durante a maior velocidade de leitura, o tamanho crítico de letra 
+                  (TCL) caracterizado pelo tamanho de letra em que a velocidade de leitura começa a decair, a velocidade de leitura 
+                  durante o tamanho crítico de letra (VTCL) e a acuidade de leitura (AL) o menor tamanho de letra lido.
                 </p>
                 <p>
-                  
-                </p>
-                <p>
-                  
-                </p>
-                <p>
-                  
-                </p>
-                <p>
-                  
-                </p>
-                <p>
-                  
-                </p>
+                  <img alt="Quasar logo" src="~assets/função_visual_sobre.png" :style="$q.screen.width > 750? '':'width:99%;'">
+                </p>    
+                
               </div>
             </q-card-section>
           </q-card>
@@ -64,12 +81,7 @@
                   Quasar, Vue, Cordova, Node.js.
 
                 </p>
-                <p>
-                 
-                </p>
-                <p>
-                 
-                </p>
+               
                 <p>
                 Na primeira etapa foi realizado o treinamento do modelo de regressão logística no Node.js e o modelo treinado
                 exportado em JSON. 
@@ -88,19 +100,7 @@
                 >AppDislexia</a>
 
                 </p>
-                <p>
-                  O protocolo MNREAD (Minnesota Low Vision Reading Test)[18] foi desenvolvido especificamente para avaliar FVL, 
-                  onde são apresentados uma sequência de textos, montados com um vocabulário controlado, em tamanhos decrescentes 
-                  (em escala logMAR ) e em cada leitura é medido a velocidade em palavras por minuto (ppm). Na Figura 1 é apresentado 
-                  um exemplo de medidas de velocidade de leitura deste teste, onde pode ser extraído a máxima velocidade de leitura 
-                  (MVL), caracterizado pela maior velocidade obtida em todos os textos, a linha máxima de velocidade de leitura 
-                  (LMVL), caracterizado pelo tamanho da letra durante a maior velocidade de leitura, o tamanho crítico de letra 
-                  (TCL) caracterizado pelo tamanho de letra em que a velocidade de leitura começa a decair, a velocidade de leitura 
-                  durante o tamanho crítico de letra (VTCL) e a acuidade de leitura (AL) o menor tamanho de letra lido.
-                </p>
-                <p>
-                  <img alt="Quasar logo" src="~assets/função_visual_sobre.png" :style="$q.screen.width > 750? '':'width:99%;'">
-                </p>    
+               
                 <p>
                   Este projeto foi realizado pela equipe de desenvolvimento do Departamento 
                   de Informática em Saúde - EPM - UNIFESP
