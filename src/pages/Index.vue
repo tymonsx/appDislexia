@@ -30,7 +30,7 @@
         </q-expansion-item>
       </q-list>
     </div>
-    <div class="text-center justify-center">
+    <div class="text-center justify-center q-ma-xs">
       <span class=" text-primary q-ma-sm text-center">Tamanho da Fonte</span>
       <q-btn
         icon="help"
@@ -123,7 +123,7 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <div class="text-center justify-center">
+    <div class="text-center justify-center q-ma-xs">
       <span class="text-primary q-ma-sm text-center"
         >Velocidade de Leitura</span
       >
