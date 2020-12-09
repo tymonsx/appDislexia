@@ -67,7 +67,7 @@
         <q-expansion-item
           :group="$q.screen.width > 1000 ? 'b' : 'sobre_app'"
           label="Processo de Criação"
-          :class="$q.screen.width > 1000 ? 'bg-secondary text-justify' : 'text-justify'"
+          class="bg-secondary text-justify"
           :default-opened="$q.screen.width > 1000"
           :style="
             $q.screen.width > 1000 ? 'font-size: 18px;' : 'font-size: 16px;'
