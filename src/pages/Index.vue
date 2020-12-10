@@ -31,19 +31,19 @@
       </q-list>
     </div>
     <div class="text-center justify-center q-ma-xs">
-      <span class=" text-primary q-ma-sm text-center">Tamanho da Fonte</span>
+      <span class=" text-primary q-ma-sm text-center">Entenda as siglas</span>
       <q-btn
         icon="help"
         color="primary"
-        @click="popupLegendaTamanho = true"
+        @click="popupLegendaSiglas = true"
         flat
         padding="none"
         style="margin-top: -2.5px;"
       />
-      <q-dialog v-model="popupLegendaTamanho">
+      <q-dialog v-model="popupLegendaSiglas">
         <q-card class="full-width">
           <q-card-section>
-            <div class="text-h6 text-center">Legenda Tamanho da Fonte</div>
+            <div class="text-h6 text-center">Legenda Siglas</div>
           </q-card-section>
 
           <q-card-section class="q-pt-none text-justify">
@@ -51,8 +51,12 @@
               logMAR = Unidade de medida para tamanhos de letras que representam
               o ângulo de visão
             </p>
+            <p>PPM = Palavras por minuto</p>
             <p>AL = Acuidade de leitura</p>
             <p>LMVL = Tamanho de letra na máxima velocidade de leitura</p>
+            <p>VL = Velocidade de leitura</p>
+            <p>MVL = Máxima velocidade de leitura</p>
+            <p>VTCL = Velocidade de leitura no tamanho crítico de letra</p>
           </q-card-section>
 
           <q-card-actions align="right" class="bg-white text-teal">
@@ -61,7 +65,7 @@
         </q-card>
       </q-dialog>
     </div>
-    <q-list class="full-width">
+    <q-list class="full-width q-pa-xs">
       <q-item>
         <q-item-section>
           <span class="text-primary">AL (logMAR)</span>
@@ -123,7 +127,7 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <div class="text-center justify-center q-ma-xs">
+    <!--<div class="text-center justify-center q-ma-xs">
       <span class="text-primary q-ma-sm text-center"
         >Velocidade de Leitura</span
       >
@@ -152,7 +156,7 @@
           </q-card-actions>
         </q-card>
       </q-dialog>
-    </div>
+    </div>-->
     <div class="row items-center">
       <q-input
         v-model.number="vl"
@@ -302,8 +306,9 @@ export default {
       vl: "",
       mvl: "",
       vtcl: "",
-      popupLegendaTamanho: false,
-      popupLegendaVelocidade: false,
+      //popupLegendaTamanho: false,
+      //popupLegendaVelocidade: false,
+      popupLegendaSiglas: false,
       popupInputNumero: false,
       popupResultados: false,
       popupCamposBranco: false,
