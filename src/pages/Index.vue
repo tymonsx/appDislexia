@@ -1,9 +1,5 @@
 <template>
   <q-page class="full-height q-pa-xs q-gutter-sm">
-    <!--<img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >-->
     <div>
       <q-list>
         <q-expansion-item
@@ -86,26 +82,6 @@
           />
         </q-item-section>
       </q-item>
-      <!--<q-item>
-        <q-item-section>
-          <span class="text-primary">TCL (logMAR)</span>
-        </q-item-section>
-        <q-item-section>
-          <q-slider
-            v-model="tcl"
-            :min="0"
-            :max="1"
-            :step="0.1"
-            label-always
-            color="primary"
-            :style="
-              $q.screen.width > 750
-                ? 'margin-left:-50%; width:150%;'
-                : 'width:105%;'
-            "
-          />
-        </q-item-section>
-      </q-item>-->
       <q-item>
         <q-item-section>
           <span class="text-primary">LMVL (logMAR)</span>
@@ -127,36 +103,6 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <!--<div class="text-center justify-center q-ma-xs">
-      <span class="text-primary q-ma-sm text-center"
-        >Velocidade de Leitura</span
-      >
-      <q-btn
-        icon="help"
-        color="primary"
-        @click="popupLegendaVelocidade = true"
-        flat
-        padding="none"
-        style="margin-top: -2.5px;"
-      />
-      <q-dialog v-model="popupLegendaVelocidade">
-        <q-card class="full-width">
-          <q-card-section>
-            <div class="text-h6 text-center">Legenda Velocidade de Leitura</div>
-          </q-card-section>
-          <q-card-section class="q-pt-none text-justify">
-            <p>PPM = Palavras por minuto</p>
-            <p>VL = Velocidade de leitura</p>
-            <p>MVL = Máxima velocidade de leitura</p>
-            <p>VTCL = Velocidade de leitura no tamanho crítico de letra</p>
-          </q-card-section>
-
-          <q-card-actions align="right" class="bg-white text-teal">
-            <q-btn flat label="OK" v-close-popup />
-          </q-card-actions>
-        </q-card>
-      </q-dialog>
-    </div>-->
     <div class="row items-center">
       <q-input
         v-model.number="vl"
@@ -192,43 +138,6 @@
         "
         ref="inputVtcl"
       />
-      <!--<q-input
-        v-model.number="vl"
-        label="VL (PPM)"
-        type="number"
-        :style="
-          $q.screen.width > 750
-            ? 'width:98.5%;margin-left:0.5%;'
-            : 'width:97%; margin-left:2%;'
-        "
-        @change="validarInputNumero('vl')"
-        ref="inputVl"
-      /><br />
-      <q-input
-        v-model.number="mvl"
-        label="MVL (PPM)"
-        type="number"
-        style=""
-        :style="
-          $q.screen.width > 750
-            ? 'width:98.5%;margin-left:0.5%;'
-            : 'width:97%; margin-left:2%;'
-        "
-        @change="validarInputNumero('mvl')"
-        ref="inputMvl"
-      /><br />
-      <q-input
-        v-model.number="vtcl"
-        label="VTCL (PPM)"
-        type="number"
-        :style="
-          $q.screen.width > 750
-            ? 'width:98.5%;margin-left:0.5%;'
-            : 'width:97%; margin-left:2%;'
-        "
-        @change="validarInputNumero('vtcl')"
-        ref="inputVtcl"
-      />-->
       <q-dialog v-model="popupInputNumero">
         <q-card class="full-width">
           <q-card-section>
@@ -254,16 +163,6 @@
         style="margin-right:20px;"
       ></q-btn>
       <q-btn label="Predizer" color="primary" @click="chamarPredicao()"></q-btn>
-      <!--<q-dialog v-model="popupResultados">
-        <q-card class="full-width">
-          <q-card-section>
-            <div class="text-h6 text-center">Resultado: {{ resultado }}</div>
-          </q-card-section>
-          <q-card-actions align="right" class="bg-white text-teal">
-            <q-btn flat label="OK" v-close-popup />
-          </q-card-actions>
-        </q-card>
-      </q-dialog>-->
       <q-dialog v-model="popupCamposBranco">
         <q-card class="full-width">
           <q-card-section>
@@ -301,13 +200,10 @@ export default {
   data() {
     return {
       lmvl: 0,
-      //tcl: 0,
       al: 0,
       vl: "",
       mvl: "",
       vtcl: "",
-      //popupLegendaTamanho: false,
-      //popupLegendaVelocidade: false,
       popupLegendaSiglas: false,
       popupInputNumero: false,
       popupResultados: false,
@@ -317,35 +213,8 @@ export default {
     };
   },
   methods: {
-    /* validarInputNumero(param) {
-      if (param == "vl") {
-        console.log("param ", this.vl);
-        if (this.vl > 400) {
-          this.popupInputNumero = true;
-          this.vl = "";
-          this.$refs.inputVl.focus();
-        }
-      } else if (param == "mvl") {
-        console.log("param ", this.mvl);
-
-        if (this.mvl > 400) {
-          this.popupInputNumero = true;
-          this.mvl = "";
-          this.$refs.inputMvl.focus();
-        }
-      } else if (param == "vtcl") {
-        console.log("param ", this.vtcl);
-
-        if (this.vtcl > 400) {
-          this.popupInputNumero = true;
-          this.vtcl = "";
-          this.$refs.inputVtcl.focus();
-        }
-      }
-    }, */
     limparCampos() {
       this.lmvl = 0;
-      //this.tcl = 0;
       this.al = 0;
       this.vl = "";
       this.mvl = "";
@@ -355,15 +224,12 @@ export default {
     },
     chamarPredicao() {
       console.log("LMVL: ", this.lmvl);
-      //console.log("TCL: ", this.tcl);
       console.log("AL: ", this.al);
       console.log("VL: ", this.vl);
       console.log("MVL: ", this.mvl);
       console.log("VTCL: ", this.vtcl);
 
       if (this.vl != "" && this.mvl != "" && this.vtcl != "") {
-        //this.popupResultados = true;
-
         this.resultado = this.metodoPredicao(
           this.lmvl,
           this.al,
@@ -390,16 +256,9 @@ export default {
       let logreg = LogisticRegressionTwoClasses.load(model);
       console.log("=> Regressão logistica Carregada.", logreg);
 
-      /* let LMVL = 0.5;
-      let AL = 0.4;
-      let VL = 116.6283796;
-      let MVL = 152.881223;
-      let VTCL = 116.6283796; */
-
       let Xtest = new Matrix([[al, vl, lmvl, mvl, vtcl]]);
       let finalResults = logreg.predict(Xtest);
       console.log(finalResults[0]);
-      //console.log(finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico");
       return finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico";
     },
     gerarDadosExemplo(param) {

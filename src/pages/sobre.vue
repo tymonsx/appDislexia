@@ -81,12 +81,11 @@
                   Quasar, Vue, Cordova, Node.js.
 
                 </p>
-               
                 <p>
                 Na primeira etapa foi realizado o treinamento do modelo de regressão logística no Node.js e o modelo treinado
-                exportado em JSON. 
+                exportado foi em JSON. 
                 </p>
-                Após a primeira etapa o modelo foi importado para a o Quasar.
+                <p>Na segunda etapa o modelo foi importado para a o Quasar.</p>
                 <p>
                   A última etapa foi a elaboração de um aplicativo para dispositivos móveis (plataforma Android) utilizando os frameworks Quasar, VueJS e Cordova. O código do aplicativo pode ser acessado através 
                   do link 
@@ -100,7 +99,14 @@
                 >AppDislexia</a>
 
                 </p>
-               
+                <p>Este projeto é baseado na dissertação de mestrado do sr. Antônio Carlos da Silva Junior que está disponível através do link <a
+                href="#"
+                v-on:click="
+                  abrirLink(
+                    'https://repositorio.unifesp.br/handle/11600/59992'
+                  )
+                "
+                >Reconhecimento automático de padrões em dislexia: uma abordagem baseada em funções visuais da leitura e aprendizado de máquina</a></p>
                 <p>
                   Este projeto foi realizado pela equipe de desenvolvimento do Departamento 
                   de Informática em Saúde - EPM - UNIFESP
@@ -133,7 +139,7 @@
 import { openURL } from "quasar";
 
 export default {
-  name: "Sobre_Dislexia",
+  name: "Sobre",
 
   data() {
     return {
