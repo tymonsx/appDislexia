@@ -4,44 +4,30 @@ const { Matrix } = require("ml-matrix");
 const LogisticRegressionTwoClasses  = require("ml-logistic-regression");
 const ConfusionMatrix = require('ml-confusion-matrix');
 
-
-const data = []
+const dados = [];
 fs.createReadStream('dados.csv')
   .pipe(parse({ delimiter: ',' }))
   .on('data', (r) => {
-    //console.log(r);
-    data.push(r);        
+    dados.push(r);        
   })
-  .on('end', () => {
-    //console.log('dados===========================================: ',data);
-    data.shift();//remove linha com os títulos das colunas
-    let Y = data.map((value,index) => { return value[value.length-1]=='dislexico'? 1 : 0; });
-    Y= Matrix.columnVector(Y);
-    console.log('Y===========================================: ',Y);
-    let X = data.map((value,index) => { return value.slice(0,-1); });
-    X=new Matrix(X);
-    console.log('X===========================================: ',X);
-    //console.log(LogisticRegressionTwoClasses);
-    //console.log(LogisticRegression);
-    let steps = 5000;
-    let learningRate = 15e-6
-    console.log('steps: '+steps+' Learning Rate: '+learningRate);
-    let logreg = new LogisticRegressionTwoClasses({
-      numSteps: steps,
-      //learningRate: 12e-10
-      learningRate: learningRate
-    });
-    logreg.train(X, Y); 
-    //console.log(JSON.stringify(logreg));
-    
-    let modeloTreinado = JSON.stringify(logreg);
-    fs.writeFile("modelo.json", modeloTreinado, function(err) {
-        if (err) {
-            console.log(err);
-        }
-    });   
-    
-    teste = [
+.on('end', () => {
+  //console.log('dados===========================================: ', dados);
+  dados.shift();//remove linha com os títulos das colunas  
+  let Y = dados.map((value, index) => { return value[value.length - 1] == 'dislexico' ? 1 : 0; });  
+  Y = Matrix.columnVector(Y);  
+  //console.log('Y===========================================: ', Y);
+  let X = dados.map((value, index) => { return value.slice(0, -1); });
+  X = new Matrix(X);
+  //console.log('X===========================================: ', X);
+  let epochs = 5000;
+  let learningRate = 15e-6;  
+  let logreg = new LogisticRegressionTwoClasses({
+    numSteps: epochs,
+    learningRate: learningRate    
+  });
+  logreg.train(X, Y);
+  //console.log(JSON.stringify(logreg));
+  teste = [
       [0.4,116.6283796,0.5,152.881223,116.6283796,1],
       [0.3,48.52227614,0.8,66.77796327,65.66347469,1],
       [0.5,58.70399639,0.9,146.2865716,139.9144967,1],
@@ -76,19 +62,17 @@ fs.createReadStream('dados.csv')
       [0.1,206.1310782,1,212.8288501,206.1310782,0],
       [0.3,37.23404255,0.5,73.73794668,47.56756757,1],
       [0.2,86.75744066,0.5,181.4516129,157.0306924,0]
-    ];
-   // console.log(teste.map((value,index) => { return value.slice(0,-1); }))
-    let Xtest = new Matrix(teste.map((value,index) => { return value.slice(0,-1); }));
-    Ytest=teste.map((value,index) => { return value[value.length-1] });
-    //Ytest = data.map((value,index) => { return value[value.length-1]=='dislexico'? 1 : 0; });
-    let finalResults = logreg.predict(Xtest);
-    console.log(Ytest);
-    console.log(finalResults);
-    console.log("pred: "+finalResults.length+" true: "+Ytest.length);
-
-    const CM2 = ConfusionMatrix.fromLabels(Ytest, finalResults);
-    console.log(CM2.getAccuracy()); 
-    console.log(CM2.getMatthewsCorrelationCoefficient(1)); 
-    console.log(CM2.getConfusionTable(1)); 
-    
-  })
+  ];
+  let Xtest = new Matrix(teste.map((value,index) => { return value.slice(0,-1); }));
+  Ytest = teste.map((value, index) => { return value[value.length - 1] });
+  let finalResults = logreg.predict(Xtest);
+  const CM2 = ConfusionMatrix.fromLabels(Ytest, finalResults);
+  console.log(CM2.getAccuracy());    
+  console.log(CM2.getConfusionTable(1));
+  let modeloTreinado = JSON.stringify(logreg);
+  fs.writeFile("modelo.json", modeloTreinado, function (err) {
+    if (err) {
+      console.log(err);
+    }
+  }); 
+});
