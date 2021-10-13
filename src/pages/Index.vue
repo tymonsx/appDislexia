@@ -61,142 +61,82 @@
         </q-card>
       </q-dialog>
     </div>
-    <q-list class="full-width q-pa-xs">
-      <q-item>
-        <q-item-section>
-          <span class="text-primary">AL (logMAR)</span>
-        </q-item-section>
-        <q-item-section>
-          <q-slider
-            v-model="al"
-            :min="0"
-            :max="1"
-            :step="0.1"
-            label-always
-            color="primary"
-            :style="
-              $q.screen.width > 750
-                ? 'margin-left:-50%; width:150%;'
-                : 'width:105%;'
-            "
-          />
-        </q-item-section>
-      </q-item>
-      <q-item>
-        <q-item-section>
-          <span class="text-primary">LMVL (logMAR)</span>
-        </q-item-section>
-        <q-item-section>
-          <q-slider
-            v-model="lmvl"
-            :min="0"
-            :max="1"
-            :step="0.1"
-            label-always
-            color="primary"
-            :style="
-              $q.screen.width > 750
-                ? 'margin-left:-50%; width:150%;'
-                : 'width:105%;'
-            "
-          />
-        </q-item-section>
-      </q-item>
-    </q-list>
-    <div class="row items-center">
-      <q-input
-        v-model.number="vl"
-        label="VL (PPM)"
-        type="number"
-        :style="
-          $q.screen.width > 750
-            ? 'width:98.5%;margin-left:0.5%;'
-            : 'width:97%; margin-left:2%;'
-        "
-        ref="inputVl"
-      /><br />
-      <q-input
-        v-model.number="mvl"
-        label="MVL (PPM)"
-        type="number"
-        style=""
-        :style="
-          $q.screen.width > 750
-            ? 'width:98.5%;margin-left:0.5%;'
-            : 'width:97%; margin-left:2%;'
-        "
-        ref="inputMvl"
-      /><br />
-      <q-input
-        v-model.number="vtcl"
-        label="VTCL (PPM)"
-        type="number"
-        :style="
-          $q.screen.width > 750
-            ? 'width:98.5%;margin-left:0.5%;'
-            : 'width:97%; margin-left:2%;'
-        "
-        ref="inputVtcl"
-      />
-      <q-dialog v-model="popupInputNumero">
-        <q-card class="full-width">
-          <q-card-section>
-            <div class="text-h6 text-center">Erro</div>
-          </q-card-section>
-          <q-card-section class="q-pt-none text-justify">
-            <p>
-              O número precisa ser de no máximo 400 . Por favor digite novamente
-            </p>
-          </q-card-section>
-
-          <q-card-actions align="right" class="bg-white text-teal">
-            <q-btn flat label="OK" v-close-popup />
-          </q-card-actions>
-        </q-card>
-      </q-dialog>
-    </div>
-    <div class="row items-end justify-center q-pa-xs">
-      <q-btn
-        label="Limpar Campos"
-        color="primary"
-        @click="limparCampos()"
-        style="margin-right:20px;"
-      ></q-btn>
-      <q-btn label="Predizer" color="primary" @click="chamarPredicao()"></q-btn>
-      <q-dialog v-model="popupCamposBranco">
-        <q-card class="full-width">
-          <q-card-section>
-            <div class="text-h6 text-center">Erro</div>
-          </q-card-section>
-          <q-card-section class="q-pt-none text-justify">
-            <p>
-              Por favor preencha todos os 5 campos
-            </p>
-          </q-card-section>
-
-          <q-card-actions align="right" class="bg-white text-teal">
-            <q-btn flat label="OK" v-close-popup />
-          </q-card-actions>
-        </q-card>
-      </q-dialog>
-    </div>
-    <div>
-      <p
-        class="text-h5 text-primary text-center text-bold"
-        :style="$q.screen.height > 750 ? 'margin-top:5%;' : ''"
-      >
-        Resultado: {{ resultado }}
-      </p>
-    </div>
+    <q-form
+      @submit.stop="chamarPredicao"
+      @reset="limparCampos"
+      class="flex flex-center"
+    >
+      <div class="full-width row q-pa-sm q-mt-md">
+        <span class="text-primary col-xs-5">AL (logMAR)</span>
+        <q-slider
+          v-model="al"
+          :min="0"
+          :max="1"
+          :step="0.1"
+          label-always
+          color="primary"
+          class="col-xs-7"
+        />
+      </div>
+      <div class="full-width row q-pa-sm q-mt-md">
+        <span class="text-primary col-xs-5">LMVL (logMAR)</span>
+        <q-slider
+          v-model="lmvl"
+          :min="0"
+          :max="1"
+          :step="0.1"
+          label-always
+          color="primary"
+          class="col-xs-7"
+        />
+      </div>
+      <div class="full-width q-pa-sm">
+        <q-input
+          v-model="vl"
+          label="VL (PPM)"
+          ref="inputVl"
+          :rules="[
+            val => (val != '' && val != null) || 'Informe um valor numérico'
+          ]"
+          @input="validarEntrada('vl')"
+          class="q-pb-xs"
+        />
+        <q-input
+          v-model="mvl"
+          label="MVL (PPM)"
+          ref="inputMvl"
+          :rules="[val => (val != '' && val != null) || 'Informe um valor']"
+          @input="validarEntrada('mvl')"
+          class="q-pb-xs"
+        />
+        <q-input
+          v-model="vtcl"
+          label="VTCL (PPM)"
+          ref="inputVtcl"
+          :rules="[val => (val != '' && val != null) || 'Informe um valor']"
+          @input="validarEntrada('vtcl')"
+        />
+      </div>
+      <div class="full-width text-center q-gutter-md">
+        <q-btn label="Predizer" color="primary" type="submit"></q-btn>
+        <q-btn label="Limpar Campos" color="primary" type="reset"></q-btn>
+      </div>
+      <div class="q-mt-md">
+        <p
+          class="text-h5 text-primary text-center text-bold"
+          :style="$q.screen.height > 750 ? 'margin-top:5%;' : ''"
+        >
+          Resultado: {{ resultado }}
+        </p>
+      </div>
+    </q-form>
   </q-page>
 </template>
-
 <script>
 import Matrix from "ml-matrix";
 import LogisticRegressionTwoClasses from "ml-logistic-regression";
-
+import arquivo_modelo from "../../public/model/modelo.json";
 export default {
-  name: "PageIndex",
   data() {
     return {
       lmvl: 0,
@@ -205,9 +145,6 @@ export default {
       mvl: "",
       vtcl: "",
       popupLegendaSiglas: false,
-      popupInputNumero: false,
-      popupResultados: false,
-      popupCamposBranco: false,
       resultado: "",
       expansionGerarDadosExemplo: false
     };
@@ -223,13 +160,16 @@ export default {
       this.expansionGerarDadosExemplo = false;
     },
     chamarPredicao() {
-      console.log("LMVL: ", this.lmvl);
-      console.log("AL: ", this.al);
-      console.log("VL: ", this.vl);
-      console.log("MVL: ", this.mvl);
-      console.log("VTCL: ", this.vtcl);
-
       if (this.vl != "" && this.mvl != "" && this.vtcl != "") {
+        this.vl = String(this.vl).replace(".", "");
+        this.vl = String(this.vl).replace(",", ".");
+
+        this.mvl = String(this.mvl).replace(".", "");
+        this.mvl = String(this.mvl).replace(",", ".");
+
+        this.vtcl = String(this.vtcl).replace(".", "");
+        this.vtcl = String(this.vtcl).replace(",", ".");
+
         this.resultado = this.metodoPredicao(
           this.lmvl,
           this.al,
@@ -249,16 +189,18 @@ export default {
       }
     },
     metodoPredicao(lmvl, al, vl, mvl, vtcl) {
-      let model = require("assets/modelo.json");
+      let model = require("../../public/model/modelo.json");
       model = JSON.parse(JSON.stringify(model));
-      console.log("=> JSON carregado.", model);
 
       let logreg = LogisticRegressionTwoClasses.load(model);
-      console.log("=> Regressão logistica Carregada.", logreg);
 
       let Xtest = new Matrix([[al, vl, lmvl, mvl, vtcl]]);
       let finalResults = logreg.predict(Xtest);
-      console.log(finalResults[0]);
+
+      this.vl = Number(this.vl).toLocaleString("pt-BR");
+      this.mvl = Number(this.mvl).toLocaleString("pt-BR");
+      this.vtcl = Number(this.vtcl).toLocaleString("pt-BR");
+
       return finalResults[0] == 1 ? "Disléxico" : "Não-Disléxico";
     },
     gerarDadosExemplo(param) {
@@ -278,7 +220,39 @@ export default {
         this.vtcl = 229.591837;
       }
 
+      this.vl = Number(this.vl).toLocaleString("pt-BR");
+      this.mvl = Number(this.mvl).toLocaleString("pt-BR");
+      this.vtcl = Number(this.vtcl).toLocaleString("pt-BR");
+
       this.expansionGerarDadosExemplo = false;
+    },
+    validarEntrada(param) {
+      let temporaria = "";
+      let expressaoRegular = /^[0-9.,]*$/;
+
+      switch (param) {
+        case "vl":
+          temporaria = String(this.vl).substring(0, this.vl.length - 1);
+          if (!expressaoRegular.test(String(this.vl).slice(-1))) {
+            this.vl = temporaria;
+            this.$refs.inputVl.$forceUpdate();
+          }
+          break;
+        case "mvl":
+          temporaria = String(this.mvl).substring(0, this.mvl.length - 1);
+          if (!expressaoRegular.test(this.mvl.slice(-1))) {
+            this.mvl = temporaria;
+            this.$refs.inputMvl.$forceUpdate();
+          }
+          break;
+        case "vtcl":
+          temporaria = String(this.vtcl).substring(0, this.vtcl.length - 1);
+          if (!expressaoRegular.test(this.vtcl.slice(-1))) {
+            this.vtcl = temporaria;
+            this.$refs.inputVtcl.$forceUpdate();
+          }
+          break;
+      }
     }
   }
 };

@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header reveal bordered class="bg-primary text-white">
       <q-bar class="q-electron-drag electron-only">
-        <div>appDislexia</div>
+        <div>App Dislexia</div>
 
         <q-space></q-space>
 
@@ -21,7 +21,7 @@
             <img
               style="display:block; margin-right:auto;  "
               width="70px"
-              src="logo_dislexia4.png"
+              src="~assets/logo_app_dislexia.png"
             />
           </div>
           <div
@@ -35,7 +35,6 @@
         <q-btn icon="info" to="/sobre" flat />
       </q-toolbar>
     </q-header>
-
     <q-footer elevated>
       <q-toolbar>
         <q-toolbar-title>
@@ -47,7 +46,7 @@
             />
           </div>
           <div
-            class="desktop-only text-caption text-center float-left"
+            class="gt-sm text-caption text-center float-left"
             style="width:80%"
           >
             Rua Botucatu, 862-Térreo, Vila Clementino, São Paulo (SP). Cep:
@@ -67,15 +66,12 @@
       </q-toolbar>
     </q-footer>
     <q-page-container>
-      <router-view :teste="3" />
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
-
 <script>
 import Vue from "vue";
-import Vuex from "vuex";
-Vue.use(Vuex);
 export default {
   name: "MainLayout",
   methods: {

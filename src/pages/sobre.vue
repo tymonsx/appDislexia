@@ -4,7 +4,7 @@
     <div style="width: 100%; padding-bottom: 135%;">
       <q-list>
         <q-expansion-item
-          :group="$q.screen.width > 1000 ? 'a' : 'sobre_app'"
+          group="significado_dislexia"
           label="O que é Dislexia ?"
           class="bg-secondary text-justify"
           :default-opened="$q.screen.width > 1000"
@@ -28,10 +28,10 @@
           </q-card>
         </q-expansion-item>
       </q-list>
-
+ 
        <q-list>
         <q-expansion-item
-          :group="$q.screen.width > 1000 ? 'b' : 'sobre_app'"
+          group="funcoes_visuais_leitura"
           label="O que são Funções Visuais de Leitura ?"
           :class="$q.screen.width > 1000 ? 'bg-secondary text-justify' : 'text-justify'"
           :default-opened="$q.screen.width > 1000"
@@ -62,10 +62,10 @@
           </q-card>
         </q-expansion-item>
       </q-list>
-
+ 
        <q-list>
         <q-expansion-item
-          :group="$q.screen.width > 1000 ? 'b' : 'sobre_app'"
+          group="processo_criacao"
           label="Processo de Criação"
           class="bg-secondary text-justify"
           :default-opened="$q.screen.width > 1000"
@@ -77,75 +77,57 @@
             <q-card-section>
               <div class="text-justify">
                 <p>
-                  O aplicativo foi elaborado utilizando as seguintes ferramentas e bibliotecas: 
+                  O aplicativo foi elaborado utilizando as seguintes ferramentas e bibliotecas:
                   Quasar, Vue, Cordova, Node.js.
-
                 </p>
                 <p>
-                Na primeira etapa foi realizado o treinamento do modelo de regressão logística no Node.js e o modelo treinado
-                exportado foi em JSON. 
+                Na primeira etapa foi realizado o treinamento do modelo de regressão logística no Node.js e o mesmo
+                foi exportado para JSON.
                 </p>
-                <p>Na segunda etapa o modelo foi importado para a o Quasar.</p>
+                <p>Na segunda etapa o modelo em JSON foi importado para a o Quasar.</p>
                 <p>
-                  A última etapa foi a elaboração de um aplicativo para dispositivos móveis (plataforma Android) utilizando os frameworks Quasar, VueJS e Cordova. O código do aplicativo pode ser acessado através 
-                  do link 
+                  A última etapa foi a elaboração de um aplicativo para dispositivos móveis (plataforma Android) utilizando os frameworks Quasar, VueJS e Cordova. O código do aplicativo pode ser acessado através
+                  do link
                   <a
                 href="#"
                 v-on:click="
                   abrirLink(
-                    'https://github.com/tymonsx/appDislexia.git'
+                    'https://github.com/tymonsx/appDislexia'
                   )
                 "
                 >AppDislexia</a>
-
+ 
                 </p>
-                <p>Este projeto é baseado na dissertação de mestrado do sr. Antônio Carlos da Silva Junior que está disponível através do link <a
-                href="#"
-                v-on:click="
-                  abrirLink(
-                    'https://repositorio.unifesp.br/handle/11600/59992'
-                  )
-                "
-                >Reconhecimento automático de padrões em dislexia: uma abordagem baseada em funções visuais da leitura e aprendizado de máquina</a></p>
+                <p>Este projeto é baseado na dissertação de mestrado do sr. Antonio Carlos da Silva Junior</p>
                 <p>
-                  Este projeto foi realizado pela equipe de desenvolvimento do Departamento 
+                  Este aplicativo foi realizado pela equipe de desenvolvimento do Departamento
                   de Informática em Saúde - EPM - UNIFESP
                   <ul>
                     <li>
-                        Antonio Carlos da Silva Junior: Analista de Tecnologia da Informação no Departamento de Informática em Saúde da UNIFESP.
+                        Antonio Carlos da Silva Junior: Analista de Tecnologia da Informação no Departamento de Informática em Saúde da UNIFESP
                     </li>
                     <li>
-                        Raphael Hendrigo de Souza Gonçalves: Analista de Tecnologia da Informação no Departamento de Informática em Saúde da UNIFESP.
+                        Ivan Calixto Ribeiro - Departamento de Informática em Saúde da UNIFESP  
                     </li>
                     <li>
-                        Ivan Calixto Ribeiro: Técnico de Tecnologia da Informação no Departamento de Informática em Saúde da UNIFESP.  
+                        Raphael Hendrigo de Souza Gonçalves: Analista de Tecnologia da Informação no Departamento de Informática em Saúde da UNIFESP
                     </li>
                   </ul>
-
+ 
                 </p>
-                
+               
               </div>
             </q-card-section>
           </q-card>
         </q-expansion-item>
       </q-list>
-
-     
     </div>
   </q-page>
 </template>
-
 <script>
 import { openURL } from "quasar";
-
 export default {
   name: "Sobre",
-
-  data() {
-    return {
-      slide: 1
-    };
-  },
   methods: {
     abrirLink(url) {
       openURL(url);
